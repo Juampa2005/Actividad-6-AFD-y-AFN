@@ -1,0 +1,454 @@
+[
+  {
+    "grafo": "grafo-10",
+    "origen": "A",
+    "destino": "D",
+    "algoritmo": "Greedy Best-First Search",
+    "nodos_visitados": 2,
+    "visitados": [
+      "A",
+      "D"
+    ],
+    "solucion": true,
+    "ruta": [
+      "A",
+      "D"
+    ],
+    "costo_ruta": 10.0,
+    "limite_visitas": 8,
+    "limite_alcanzado": false,
+    "T(n)": "O((V + E) log V)",
+    "S(n)": "O(V + E)",
+    "operaciones_estimadas": 5,
+    "maximo_elementos_frontera": 3,
+    "heuristica_utilizada": "mínimo número de aristas hasta el destino (BFS inversa)"
+  },
+  {
+    "grafo": "grafo-10",
+    "origen": "A",
+    "destino": "D",
+    "algoritmo": "A*",
+    "nodos_visitados": 2,
+    "visitados": [
+      "A",
+      "D"
+    ],
+    "solucion": true,
+    "ruta": [
+      "A",
+      "D"
+    ],
+    "costo_ruta": 10.0,
+    "limite_visitas": 8,
+    "limite_alcanzado": false,
+    "T(n)": "O((V + E) log V)",
+    "S(n)": "O(V + E)",
+    "operaciones_estimadas": 5,
+    "maximo_elementos_frontera": 3,
+    "heuristica_utilizada": "h(n)=0 (sin coordenadas; equivale a Dijkstra y conserva optimalidad)"
+  },
+  {
+    "grafo": "grafo-10",
+    "origen": "B",
+    "destino": "H",
+    "algoritmo": "Greedy Best-First Search",
+    "nodos_visitados": 3,
+    "visitados": [
+      "B",
+      "E",
+      "H"
+    ],
+    "solucion": true,
+    "ruta": [
+      "B",
+      "E",
+      "H"
+    ],
+    "costo_ruta": 47.0,
+    "limite_visitas": 8,
+    "limite_alcanzado": false,
+    "T(n)": "O((V + E) log V)",
+    "S(n)": "O(V + E)",
+    "operaciones_estimadas": 7,
+    "maximo_elementos_frontera": 3,
+    "heuristica_utilizada": "mínimo número de aristas hasta el destino (BFS inversa)"
+  },
+  {
+    "grafo": "grafo-10",
+    "origen": "B",
+    "destino": "H",
+    "algoritmo": "A*",
+    "nodos_visitados": 6,
+    "visitados": [
+      "B",
+      "F",
+      "I",
+      "E",
+      "J",
+      "H"
+    ],
+    "solucion": true,
+    "ruta": [
+      "B",
+      "E",
+      "H"
+    ],
+    "costo_ruta": 47.0,
+    "limite_visitas": 8,
+    "limite_alcanzado": false,
+    "T(n)": "O((V + E) log V)",
+    "S(n)": "O(V + E)",
+    "operaciones_estimadas": 13,
+    "maximo_elementos_frontera": 3,
+    "heuristica_utilizada": "h(n)=0 (sin coordenadas; equivale a Dijkstra y conserva optimalidad)"
+  },
+  {
+    "grafo": "grafo-10",
+    "origen": "C",
+    "destino": "J",
+    "algoritmo": "Greedy Best-First Search",
+    "nodos_visitados": 3,
+    "visitados": [
+      "C",
+      "G",
+      "J"
+    ],
+    "solucion": true,
+    "ruta": [
+      "C",
+      "G",
+      "J"
+    ],
+    "costo_ruta": 95.0,
+    "limite_visitas": 8,
+    "limite_alcanzado": false,
+    "T(n)": "O((V + E) log V)",
+    "S(n)": "O(V + E)",
+    "operaciones_estimadas": 7,
+    "maximo_elementos_frontera": 3,
+    "heuristica_utilizada": "mínimo número de aristas hasta el destino (BFS inversa)"
+  },
+  {
+    "grafo": "grafo-10",
+    "origen": "C",
+    "destino": "J",
+    "algoritmo": "A*",
+    "nodos_visitados": 6,
+    "visitados": [
+      "C",
+      "E",
+      "H",
+      "G",
+      "I",
+      "J"
+    ],
+    "solucion": true,
+    "ruta": [
+      "C",
+      "E",
+      "H",
+      "J"
+    ],
+    "costo_ruta": 46.0,
+    "limite_visitas": 8,
+    "limite_alcanzado": false,
+    "T(n)": "O((V + E) log V)",
+    "S(n)": "O(V + E)",
+    "operaciones_estimadas": 14,
+    "maximo_elementos_frontera": 3,
+    "heuristica_utilizada": "h(n)=0 (sin coordenadas; equivale a Dijkstra y conserva optimalidad)"
+  },
+  {
+    "grafo": "grafo-25",
+    "origen": "A",
+    "destino": "D",
+    "algoritmo": "Greedy Best-First Search",
+    "nodos_visitados": 2,
+    "visitados": [
+      "A",
+      "D"
+    ],
+    "solucion": true,
+    "ruta": [
+      "A",
+      "D"
+    ],
+    "costo_ruta": 36.0,
+    "limite_visitas": 20,
+    "limite_alcanzado": false,
+    "T(n)": "O((V + E) log V)",
+    "S(n)": "O(V + E)",
+    "operaciones_estimadas": 4,
+    "maximo_elementos_frontera": 2,
+    "heuristica_utilizada": "mínimo número de aristas hasta el destino (BFS inversa)"
+  },
+  {
+    "grafo": "grafo-25",
+    "origen": "A",
+    "destino": "D",
+    "algoritmo": "A*",
+    "nodos_visitados": 2,
+    "visitados": [
+      "A",
+      "D"
+    ],
+    "solucion": true,
+    "ruta": [
+      "A",
+      "D"
+    ],
+    "costo_ruta": 36.0,
+    "limite_visitas": 20,
+    "limite_alcanzado": false,
+    "T(n)": "O((V + E) log V)",
+    "S(n)": "O(V + E)",
+    "operaciones_estimadas": 4,
+    "maximo_elementos_frontera": 2,
+    "heuristica_utilizada": "h(n)=0 (sin coordenadas; equivale a Dijkstra y conserva optimalidad)"
+  },
+  {
+    "grafo": "grafo-25",
+    "origen": "D",
+    "destino": "I",
+    "algoritmo": "Greedy Best-First Search",
+    "nodos_visitados": 2,
+    "visitados": [
+      "D",
+      "I"
+    ],
+    "solucion": true,
+    "ruta": [
+      "D",
+      "I"
+    ],
+    "costo_ruta": 22.0,
+    "limite_visitas": 20,
+    "limite_alcanzado": false,
+    "T(n)": "O((V + E) log V)",
+    "S(n)": "O(V + E)",
+    "operaciones_estimadas": 5,
+    "maximo_elementos_frontera": 3,
+    "heuristica_utilizada": "mínimo número de aristas hasta el destino (BFS inversa)"
+  },
+  {
+    "grafo": "grafo-25",
+    "origen": "D",
+    "destino": "I",
+    "algoritmo": "A*",
+    "nodos_visitados": 3,
+    "visitados": [
+      "D",
+      "E",
+      "I"
+    ],
+    "solucion": true,
+    "ruta": [
+      "D",
+      "E",
+      "I"
+    ],
+    "costo_ruta": 17.0,
+    "limite_visitas": 20,
+    "limite_alcanzado": false,
+    "T(n)": "O((V + E) log V)",
+    "S(n)": "O(V + E)",
+    "operaciones_estimadas": 8,
+    "maximo_elementos_frontera": 4,
+    "heuristica_utilizada": "h(n)=0 (sin coordenadas; equivale a Dijkstra y conserva optimalidad)"
+  },
+  {
+    "grafo": "grafo-25",
+    "origen": "B",
+    "destino": "G",
+    "algoritmo": "Greedy Best-First Search",
+    "nodos_visitados": 2,
+    "visitados": [
+      "B",
+      "G"
+    ],
+    "solucion": true,
+    "ruta": [
+      "B",
+      "G"
+    ],
+    "costo_ruta": 30.0,
+    "limite_visitas": 20,
+    "limite_alcanzado": false,
+    "T(n)": "O((V + E) log V)",
+    "S(n)": "O(V + E)",
+    "operaciones_estimadas": 4,
+    "maximo_elementos_frontera": 2,
+    "heuristica_utilizada": "mínimo número de aristas hasta el destino (BFS inversa)"
+  },
+  {
+    "grafo": "grafo-25",
+    "origen": "B",
+    "destino": "G",
+    "algoritmo": "A*",
+    "nodos_visitados": 5,
+    "visitados": [
+      "B",
+      "D",
+      "E",
+      "I",
+      "G"
+    ],
+    "solucion": true,
+    "ruta": [
+      "B",
+      "G"
+    ],
+    "costo_ruta": 30.0,
+    "limite_visitas": 20,
+    "limite_alcanzado": false,
+    "T(n)": "O((V + E) log V)",
+    "S(n)": "O(V + E)",
+    "operaciones_estimadas": 14,
+    "maximo_elementos_frontera": 6,
+    "heuristica_utilizada": "h(n)=0 (sin coordenadas; equivale a Dijkstra y conserva optimalidad)"
+  },
+  {
+    "grafo": "grafo-50",
+    "origen": "A",
+    "destino": "F",
+    "algoritmo": "Greedy Best-First Search",
+    "nodos_visitados": 2,
+    "visitados": [
+      "A",
+      "F"
+    ],
+    "solucion": true,
+    "ruta": [
+      "A",
+      "F"
+    ],
+    "costo_ruta": 28.0,
+    "limite_visitas": 40,
+    "limite_alcanzado": false,
+    "T(n)": "O((V + E) log V)",
+    "S(n)": "O(V + E)",
+    "operaciones_estimadas": 5,
+    "maximo_elementos_frontera": 3,
+    "heuristica_utilizada": "mínimo número de aristas hasta el destino (BFS inversa)"
+  },
+  {
+    "grafo": "grafo-50",
+    "origen": "A",
+    "destino": "F",
+    "algoritmo": "A*",
+    "nodos_visitados": 2,
+    "visitados": [
+      "A",
+      "F"
+    ],
+    "solucion": true,
+    "ruta": [
+      "A",
+      "F"
+    ],
+    "costo_ruta": 28.0,
+    "limite_visitas": 40,
+    "limite_alcanzado": false,
+    "T(n)": "O((V + E) log V)",
+    "S(n)": "O(V + E)",
+    "operaciones_estimadas": 5,
+    "maximo_elementos_frontera": 3,
+    "heuristica_utilizada": "h(n)=0 (sin coordenadas; equivale a Dijkstra y conserva optimalidad)"
+  },
+  {
+    "grafo": "grafo-50",
+    "origen": "B",
+    "destino": "I",
+    "algoritmo": "Greedy Best-First Search",
+    "nodos_visitados": 2,
+    "visitados": [
+      "B",
+      "I"
+    ],
+    "solucion": true,
+    "ruta": [
+      "B",
+      "I"
+    ],
+    "costo_ruta": 30.0,
+    "limite_visitas": 40,
+    "limite_alcanzado": false,
+    "T(n)": "O((V + E) log V)",
+    "S(n)": "O(V + E)",
+    "operaciones_estimadas": 4,
+    "maximo_elementos_frontera": 2,
+    "heuristica_utilizada": "mínimo número de aristas hasta el destino (BFS inversa)"
+  },
+  {
+    "grafo": "grafo-50",
+    "origen": "B",
+    "destino": "I",
+    "algoritmo": "A*",
+    "nodos_visitados": 2,
+    "visitados": [
+      "B",
+      "I"
+    ],
+    "solucion": true,
+    "ruta": [
+      "B",
+      "I"
+    ],
+    "costo_ruta": 30.0,
+    "limite_visitas": 40,
+    "limite_alcanzado": false,
+    "T(n)": "O((V + E) log V)",
+    "S(n)": "O(V + E)",
+    "operaciones_estimadas": 4,
+    "maximo_elementos_frontera": 2,
+    "heuristica_utilizada": "h(n)=0 (sin coordenadas; equivale a Dijkstra y conserva optimalidad)"
+  },
+  {
+    "grafo": "grafo-50",
+    "origen": "K",
+    "destino": "R",
+    "algoritmo": "Greedy Best-First Search",
+    "nodos_visitados": 2,
+    "visitados": [
+      "K",
+      "R"
+    ],
+    "solucion": true,
+    "ruta": [
+      "K",
+      "R"
+    ],
+    "costo_ruta": 24.0,
+    "limite_visitas": 40,
+    "limite_alcanzado": false,
+    "T(n)": "O((V + E) log V)",
+    "S(n)": "O(V + E)",
+    "operaciones_estimadas": 3,
+    "maximo_elementos_frontera": 1,
+    "heuristica_utilizada": "mínimo número de aristas hasta el destino (BFS inversa)"
+  },
+  {
+    "grafo": "grafo-50",
+    "origen": "K",
+    "destino": "R",
+    "algoritmo": "A*",
+    "nodos_visitados": 2,
+    "visitados": [
+      "K",
+      "R"
+    ],
+    "solucion": true,
+    "ruta": [
+      "K",
+      "R"
+    ],
+    "costo_ruta": 24.0,
+    "limite_visitas": 40,
+    "limite_alcanzado": false,
+    "T(n)": "O((V + E) log V)",
+    "S(n)": "O(V + E)",
+    "operaciones_estimadas": 3,
+    "maximo_elementos_frontera": 1,
+    "heuristica_utilizada": "h(n)=0 (sin coordenadas; equivale a Dijkstra y conserva optimalidad)"
+  }
+]
