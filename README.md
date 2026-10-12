@@ -1,3 +1,14 @@
+
+## 1. Bloque de identificación
+
+- **Nombre del alumno:** Juan Pablo Ruiz Gil
+- **Matricula** 192034
+- **Materia:** Lenguajes de computacion
+- **Actividad:** 12 Algoritmos de búsqueda informada (heurísticos)
+
+
+
+---
 # Actividad 12 — Algoritmos de búsqueda informada
 
 ## Instalación y ejecución
