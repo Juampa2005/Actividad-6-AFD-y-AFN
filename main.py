@@ -3,9 +3,20 @@ from fastapi import UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import Response
 from typing import List, Dict
-from pydantic import BaseModel
+
 import itertools
 import ast
+
+import random
+import time
+import tracemalloc
+import heapq
+
+from itertools import combinations
+from typing import Optional
+
+from fastapi import HTTPException
+from pydantic import BaseModel, Field
 app = FastAPI(
     title="API de Operaciones con Lenguajes, AFD, AFN y Complejidad",
     description="API para operaciones con lenguajes, evaluación de AFD y AFN y análisis de complejidad de programas",
@@ -642,3 +653,380 @@ def endpoint_star(request: SearchRequest):
         )
     except ValueError as error:
         raise HTTPException(status_code=400, detail=str(error))
+    
+# ============================================================
+# ACTIVIDAD 13: ALGORITMOS P, NP Y HEURISTICAS
+# ============================================================
+
+class GenerarGrafoRequest(BaseModel):
+    n: int = Field(default=5, ge=2, le=15)
+    semilla: int = 42
+    peso_minimo: int = Field(default=1, ge=1)
+    peso_maximo: int = Field(default=20, ge=1)
+
+
+class GrafoRequest(BaseModel):
+    grafo: dict[str, dict[str, float]]
+
+
+class DijkstraRequest(GrafoRequest):
+    inicio: str
+    destino: str
+
+
+class TSPRequest(GrafoRequest):
+    inicio: Optional[str] = None
+
+
+def generar_grafo_ponderado(n, semilla, peso_minimo, peso_maximo):
+    """Genera un grafo completo, ponderado y no dirigido."""
+    if peso_maximo < peso_minimo:
+        raise HTTPException(
+            status_code=400,
+            detail="El peso_maximo debe ser >= peso_minimo."
+        )
+
+    rng = random.Random(semilla)
+    nodos = [f"N{i}" for i in range(n)]
+    grafo = {nodo: {} for nodo in nodos}
+
+    for i in range(n):
+        for j in range(i + 1, n):
+            peso = rng.randint(peso_minimo, peso_maximo)
+            grafo[nodos[i]][nodos[j]] = peso
+            grafo[nodos[j]][nodos[i]] = peso
+
+    return grafo
+
+
+def validar_grafo(grafo):
+    if not grafo:
+        raise HTTPException(
+            status_code=400,
+            detail="El grafo no puede estar vacío."
+        )
+
+    for origen, vecinos in grafo.items():
+        for destino, peso in vecinos.items():
+            if destino not in grafo:
+                raise HTTPException(
+                    status_code=400,
+                    detail=f"El nodo {destino} no existe."
+                )
+            if not isinstance(peso, (int, float)) or peso < 0:
+                raise HTTPException(
+                    status_code=400,
+                    detail="Los pesos deben ser números no negativos."
+                )
+
+
+def medir_ejecucion(funcion, *args):
+    """Mide tiempo, memoria máxima rastreada y resultado."""
+    tracemalloc.start()
+    inicio = time.perf_counter()
+
+    try:
+        resultado = funcion(*args)
+        tiempo_ms = (time.perf_counter() - inicio) * 1000
+        _, memoria_pico = tracemalloc.get_traced_memory()
+    finally:
+        tracemalloc.stop()
+
+    resultado["tiempo_ejecucion_ms"] = round(tiempo_ms, 4)
+    resultado["memoria_pico_bytes"] = memoria_pico
+    resultado["memoria_pico_kb"] = round(memoria_pico / 1024, 2)
+    return resultado
+
+
+# ------------------------------------------------------------
+# DIJKSTRA
+# ------------------------------------------------------------
+
+def ejecutar_dijkstra(grafo, inicio, destino):
+    if inicio not in grafo or destino not in grafo:
+        raise HTTPException(
+            status_code=400,
+            detail="El inicio y el destino deben existir en el grafo."
+        )
+
+    distancias = {nodo: float("inf") for nodo in grafo}
+    anteriores = {}
+    distancias[inicio] = 0
+    cola = [(0, inicio)]
+    recorridos = 0
+
+    while cola:
+        distancia, actual = heapq.heappop(cola)
+
+        if distancia != distancias[actual]:
+            continue
+
+        recorridos += 1
+
+        if actual == destino:
+            break
+
+        for vecino, peso in grafo[actual].items():
+            nueva_distancia = distancia + peso
+
+            if nueva_distancia < distancias[vecino]:
+                distancias[vecino] = nueva_distancia
+                anteriores[vecino] = actual
+                heapq.heappush(
+                    cola, (nueva_distancia, vecino)
+                )
+
+    if distancias[destino] == float("inf"):
+        raise HTTPException(
+            status_code=400,
+            detail="No existe un camino entre el inicio y el destino."
+        )
+
+    camino = []
+    actual = destino
+
+    while actual != inicio:
+        camino.append(actual)
+        actual = anteriores[actual]
+
+    camino.append(inicio)
+    camino.reverse()
+
+    return {
+        "algoritmo": "Dijkstra",
+        "camino": camino,
+        "costo_camino": distancias[destino],
+        "nodos_recorridos": recorridos
+    }
+
+
+# ------------------------------------------------------------
+# AGENTE VIAJERO EXACTO: HELD-KARP
+# ------------------------------------------------------------
+
+def ejecutar_tsp_exacto(grafo, inicio):
+    nodos = list(grafo.keys())
+
+    if inicio is None:
+        inicio = nodos[0]
+
+    if inicio not in grafo:
+        raise HTTPException(
+            status_code=400,
+            detail="El nodo inicial no existe."
+        )
+
+    if len(nodos) == 1:
+        return {
+            "algoritmo": "TSP exacto (Held-Karp)",
+            "camino": [inicio, inicio],
+            "costo_camino": 0,
+            "nodos_recorridos": 1
+        }
+
+    restantes = [n for n in nodos if n != inicio]
+    n = len(restantes)
+
+    # dp[(mascara, j)] = costo mínimo para visitar
+    # la máscara de nodos y terminar en el nodo j.
+    dp = {}
+    padres = {}
+    estados = 0
+
+    for j, nodo in enumerate(restantes):
+        peso = grafo[inicio].get(nodo)
+        if peso is not None:
+            mascara = 1 << j
+            dp[(mascara, j)] = peso
+            padres[(mascara, j)] = None
+
+    for tamano in range(2, n + 1):
+        for grupo in combinations(range(n), tamano):
+            mascara = sum(1 << j for j in grupo)
+
+            for j in grupo:
+                mascara_previa = mascara ^ (1 << j)
+                mejor_costo = float("inf")
+                mejor_anterior = None
+
+                for i in grupo:
+                    if i == j:
+                        continue
+
+                    estado_previo = (mascara_previa, i)
+                    if estado_previo not in dp:
+                        continue
+
+                    peso = grafo[restantes[i]].get(restantes[j])
+                    if peso is None:
+                        continue
+
+                    costo = dp[estado_previo] + peso
+
+                    if costo < mejor_costo:
+                        mejor_costo = costo
+                        mejor_anterior = i
+
+                if mejor_anterior is not None:
+                    estado = (mascara, j)
+                    dp[estado] = mejor_costo
+                    padres[estado] = mejor_anterior
+                    estados += 1
+
+    mascara_completa = (1 << n) - 1
+    mejor_costo = float("inf")
+    ultimo = None
+
+    for j, nodo in enumerate(restantes):
+        estado = (mascara_completa, j)
+        peso_regreso = grafo[nodo].get(inicio)
+
+        if estado not in dp or peso_regreso is None:
+            continue
+
+        costo_total = dp[estado] + peso_regreso
+
+        if costo_total < mejor_costo:
+            mejor_costo = costo_total
+            ultimo = j
+
+    if ultimo is None:
+        raise HTTPException(
+            status_code=400,
+            detail="No existe un circuito que visite todos los nodos."
+        )
+
+    # Reconstruir el recorrido óptimo.
+    mascara = mascara_completa
+    actual = ultimo
+    ruta_inversa = []
+
+    while actual is not None:
+        ruta_inversa.append(restantes[actual])
+        anterior = padres[(mascara, actual)]
+        mascara ^= 1 << actual
+        actual = anterior
+
+    camino = [inicio] + list(reversed(ruta_inversa)) + [inicio]
+
+    return {
+        "algoritmo": "TSP exacto (Held-Karp)",
+        "camino": camino,
+        "costo_camino": mejor_costo,
+        "nodos_recorridos": estados
+    }
+
+
+# ------------------------------------------------------------
+# AGENTE VIAJERO VORAZ
+# ------------------------------------------------------------
+
+def ejecutar_tsp_voraz(grafo, inicio):
+    nodos = list(grafo.keys())
+
+    if inicio is None:
+        inicio = nodos[0]
+
+    if inicio not in grafo:
+        raise HTTPException(
+            status_code=400,
+            detail="El nodo inicial no existe."
+        )
+
+    no_visitados = set(nodos)
+    no_visitados.remove(inicio)
+
+    camino = [inicio]
+    actual = inicio
+    costo_total = 0
+    recorridos = 1
+
+    while no_visitados:
+        candidatos = [
+            (peso, vecino)
+            for vecino, peso in grafo[actual].items()
+            if vecino in no_visitados
+        ]
+
+        if not candidatos:
+            raise HTTPException(
+                status_code=400,
+                detail="No existe un recorrido que visite todos los nodos."
+            )
+
+        peso, siguiente = min(candidatos)
+        costo_total += peso
+        camino.append(siguiente)
+        no_visitados.remove(siguiente)
+        actual = siguiente
+        recorridos += 1
+
+    peso_regreso = grafo[actual].get(inicio)
+
+    if peso_regreso is None:
+        raise HTTPException(
+            status_code=400,
+            detail="No existe una conexión para regresar al inicio."
+        )
+
+    costo_total += peso_regreso
+    camino.append(inicio)
+
+    return {
+        "algoritmo": "TSP voraz",
+        "camino": camino,
+        "costo_camino": costo_total,
+        "nodos_recorridos": recorridos
+    }
+
+
+# ============================================================
+# ENDPOINTS ACTIVIDAD 13
+# ============================================================
+
+@app.post("/grafos/generar")
+def endpoint_generar_grafo(datos: GenerarGrafoRequest):
+    grafo = generar_grafo_ponderado(
+        datos.n,
+        datos.semilla,
+        datos.peso_minimo,
+        datos.peso_maximo
+    )
+
+    return {
+        "nodos": datos.n,
+        "tipo": "completo no dirigido ponderado",
+        "semilla": datos.semilla,
+        "grafo": grafo
+    }
+
+
+@app.post("/dijkstra")
+def endpoint_dijkstra(datos: DijkstraRequest):
+    validar_grafo(datos.grafo)
+    return medir_ejecucion(
+        ejecutar_dijkstra,
+        datos.grafo,
+        datos.inicio,
+        datos.destino
+    )
+
+
+@app.post("/tsp/exacto")
+def endpoint_tsp_exacto(datos: TSPRequest):
+    validar_grafo(datos.grafo)
+    return medir_ejecucion(
+        ejecutar_tsp_exacto,
+        datos.grafo,
+        datos.inicio
+    )
+
+
+@app.post("/tsp/voraz")
+def endpoint_tsp_voraz(datos: TSPRequest):
+    validar_grafo(datos.grafo)
+    return medir_ejecucion(
+        ejecutar_tsp_voraz,
+        datos.grafo,
+        datos.inicio
+    )
