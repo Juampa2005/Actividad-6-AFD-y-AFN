@@ -145,9 +145,9 @@ Para Dijkstra se utiliza `N0` como origen y `N4`, `N9` o `N14` como destino, seg
 
 | Algoritmo | Tiempo (ms) | Memoria pico (KB) | Nodos/estados recorridos | Costo |
 |---|---:|---:|---:|---:|
-| Dijkstra | [Registrar] | [Registrar] | [Registrar] | [Registrar] |
-| TSP exacto | [Registrar] | [Registrar] | [Registrar] | [Registrar] |
-| TSP voraz | [Registrar] | [Registrar] | [Registrar] | [Registrar] |
+| Dijkstra | [0.0332] | [.224] | [5] | [7] |
+| TSP exacto | [0.336] | [3.05] | [28] | [19] |
+| TSP voraz | [0.0871] | [1.24] | [5] | [19] |
 
 **Resultado de la prueba:** [Indicar si los tres endpoints respondieron correctamente y describir brevemente los resultados obtenidos].
 
@@ -157,9 +157,9 @@ Para Dijkstra se utiliza `N0` como origen y `N4`, `N9` o `N14` como destino, seg
 
 | Algoritmo | Tiempo (ms) | Memoria pico (KB) | Nodos/estados recorridos | Costo |
 |---|---:|---:|---:|---:|
-| Dijkstra | [Registrar] | [Registrar] | [Registrar] | [Registrar] |
-| TSP exacto | [Registrar] | [Registrar] | [Registrar] | [Registrar] |
-| TSP voraz | [Registrar] | [Registrar] | [Registrar] | [Registrar] |
+| Dijkstra | [0.0653] | [0.99] | [5] | [4] |
+| TSP exacto | [39.4499] | [307.96] | [2295] | [26] |
+| TSP voraz | [0.1184] | [1.35] | [10] | [32] |
 
 **Resultado de la prueba:** [Describir las diferencias observadas respecto a la prueba de cinco nodos].
 
@@ -169,21 +169,10 @@ Para Dijkstra se utiliza `N0` como origen y `N4`, `N9` o `N14` como destino, seg
 
 | Algoritmo | Tiempo (ms) | Memoria pico (KB) | Nodos/estados recorridos | Costo |
 |---|---:|---:|---:|---:|
-| Dijkstra | [Registrar] | [Registrar] | [Registrar] | [Registrar] |
-| TSP exacto | [Registrar] | [Registrar] | [Registrar] | [Registrar] |
-| TSP voraz | [Registrar] | [Registrar] | [Registrar] | [Registrar] |
+| Dijkstra | [0.146] | [1.64] | [12] | [6] |
+| TSP exacto | [3117.2929] | [19937.4] | [114674] | [36] |
+| TSP voraz | [0.1706] | [1.51] | [15] | [36] |
 
-**Resultado de la prueba:** [Describir el comportamiento de los algoritmos, especialmente el crecimiento del tiempo y la memoria del TSP exacto].
-
-### 7.4. Verificación del generador
-
-| Tamaño del grafo | Resultado esperado | Resultado observado |
-|---|---|---|
-| 5 nodos | Grafo completo con 5 nodos y 10 aristas únicas. | [Registrar] |
-| 10 nodos | Grafo completo con 10 nodos y 45 aristas únicas. | [Registrar] |
-| 15 nodos | Grafo completo con 15 nodos y 105 aristas únicas. | [Registrar] |
-
-El número de aristas únicas de un grafo completo no dirigido se calcula mediante \(E=n(n-1)/2\).
 
 ## 8. Análisis comparativo
 
@@ -215,12 +204,3 @@ Se deben anexar capturas de pantalla de Swagger UI que muestren:
 4. La ejecución del TSP voraz para los tres tamaños.
 5. Las respuestas JSON que incluyan las métricas solicitadas.
 
-Las capturas y las tablas de resultados deben corresponder a ejecuciones reales de la implementación.
-
-## 11. Repositorio
-
-Repositorio del proyecto:
-
-https://github.com/Juampa2005/Actividad-6-AFD-y-AFN
-
-El repositorio contiene el backend desarrollado con FastAPI y los endpoints implementados para las actividades relacionadas con autómatas, análisis de complejidad y algoritmos de grafos.

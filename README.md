@@ -228,29 +228,3 @@ Tiene complejidad exponencial. El problema de optimización TSP es NP-difícil, 
 Construye un circuito seleccionando la conexión más económica hacia un nodo todavía no visitado.
 
 Para la implementación sobre un grafo completo representado mediante diccionarios, su complejidad temporal es `O(n²)`. Es una heurística polinómica que no garantiza la solución óptima.
-
-## 12. Registro de resultados
-
-Completa la siguiente tabla con los valores reales obtenidos en Swagger.
-
-| Nodos | Algoritmo | Tiempo (ms) | Memoria pico (KB) | Nodos/estados recorridos | Costo |
-|---:|---|---:|---:|---:|---:|
-| 5 | Dijkstra | | | | |
-| 5 | TSP exacto | | | | |
-| 5 | TSP voraz | | | | |
-| 10 | Dijkstra | | | | |
-| 10 | TSP exacto | | | | |
-| 10 | TSP voraz | | | | |
-| 15 | Dijkstra | | | | |
-| 15 | TSP exacto | | | | |
-| 15 | TSP voraz | | | | |
-
-## 13. Conclusión
-
-La implementación permite comparar un algoritmo polinómico de caminos mínimos con dos estrategias para el problema del agente viajero. Dijkstra busca una ruta óptima entre dos nodos; Held-Karp obtiene un circuito óptimo con un costo computacional exponencial; y la heurística voraz construye una solución generalmente más rápida, sin garantizar que sea óptima.
-
-Las pruebas con grafos de 5, 10 y 15 nodos permiten observar las diferencias de tiempo, memoria y costo de las soluciones.
-
-## 14. Repositorio
-
-[Actividad-6-AFD-y-AFN — GitHub](https://github.com/Juampa2005/Actividad-6-AFD-y-AFN)
